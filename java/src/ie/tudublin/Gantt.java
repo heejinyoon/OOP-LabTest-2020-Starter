@@ -109,26 +109,25 @@ public class Gantt extends PApplet
 	{
 		println("Mouse pressed");	
 		float border = width * 0.08f;
-		float boundary = 10;
 
         for(int i=0; i < tasks.size(); i++) {
             Task ta = tasks.get(i);
 
 			float x = map(i, 0, ta.getStart(), startXPoint, width - border); 
+			float y = map(i, 0, tasks.size(), border, height - border);
 			float left = map(ta.getStart(), 1, 30, x, x + gap);
             float right = map(ta.getEnd(), 1, 30, x, x + gap); 
 
-			if(mouseX > left && mouseX < left + boundary &&
-			   mouseY > h - w && mouseY < h + w) {
+			if(mouseX > left && mouseX < left + x &&
+			   mouseY > y && mouseY < y + h) {
 					selected1 = i;
-			} else if(mouseX > right - boundary && mouseX < right &&
-			          mouseY > h - w && mouseY < h + w){
+			} else if(mouseX > right - x && mouseX < right &&
+			          mouseY > y && mouseY < y + h){
 					selected2 = i;
 			} else {
 				selected1 = i;
                 selected2 = -1;
 			}
-			boundary += 40;
         }
 	}
 
